@@ -1,13 +1,19 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import HomepageLayout from './Components/Layouts/HomepageLayout';
+import StickyLayout from './Components/Layouts/StickyLayout';
 
 function App() {
   return (
-    <React.Fragment>
-      <h2>
-        react app.js file
-      </h2>
-    </React.Fragment>
+    <Router>
+      <React.Fragment>
+        <Switch>
+          <Route path='/' exact component={HomepageLayout} />
+          <Route path='/blog' component={StickyLayout} />
+        </Switch>
+      </React.Fragment>
+    </Router>
   );
 }
 
