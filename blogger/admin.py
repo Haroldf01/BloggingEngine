@@ -1,8 +1,8 @@
 from django.contrib import admin
-# from .models import BlogPost
+from .models import Blogger
 
-# admin.site.site_header = 'Bloggers Admin'
-# admin.site.register(BlogPost)
+admin.site.site_header = 'Bloggers Admin'
+admin.site.register(Blogger)
 
-# class BlogPostAdmin(admin.ModelAdmin):
-# 	list_display = ('title', 'topic', 'writer')
+class BloggerAdmin(admin.ModelAdmin):
+	list_display = ('title', 'topic', 'writer')

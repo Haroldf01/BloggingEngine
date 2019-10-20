@@ -1,22 +1,28 @@
 from django.db import models
+from django.conf import settings
+from user.models import User
 import os
 
-# media_location = './media/{}'.format(os.mkdir(title))
 
-# class BlogPost(models.Model):
-# 	title = models.CharField(max_length=128)
-# 	topic = models.CharField(max_length=50)
-# 	description = models.CharField(max_length=140)
-# 	created_at = models.DateTimeField(auto_now_add=True)
-# 	writer = models.ForeignKey('Blogger', on_delete=models.CASCADE)
-# 	content = models.TextField()
-# 	blog_images = models.ImageField(upload_to=media_location)
+STATUS = (
+	(0, 'draft'),
+	(1, 'publish')
+)
 
-# 	def __str__(self):
-# 		return self.title, self.topic, self.created_at
+class Blogger(models.Model):
+	title = models.CharField(max_length=254, unique=True)
+	slug = models.SlugField(max_length=254, unique=True)
+	topic = models.CharField(max_length=50)
+	auther = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
+	description = models.CharField(max_length=140)
+	created_on = models.DateTimeField(auto_now_add=True)
+	updated_on = models.DateTimeField(auto_now=True)
+	content = models.TextField()
+	status = models.IntegerField(choices=STATUS, default=0)
+	img = models.ImageField(upload_to=os.path.join(settings.MEDIA_ROOT))
 
+	class Meta:
+		ordering = ['-created_on', '-updated_on']
 
-# class Blogger(models.Model):
-# 	firstName = models.CharField(max_length=50)
-# 	lastName = models.CharField(max_length=50)
-# 	email = models.EmailField(max_length=254, unique=True)
+	def __str__(self):
+		return self.title
