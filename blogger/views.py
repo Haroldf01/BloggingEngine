@@ -8,6 +8,6 @@ class BloggerList(generics.ListAPIView):
     serializer_class = BloggerSerializer
 
 
-class BlogDetail(generics.RetrieveAPIView):
+class BlogDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Blogger.objects.all()
     serializer_class = BloggerSerializer
