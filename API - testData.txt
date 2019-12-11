@@ -1,0 +1,66 @@
+{
+	"articles": {
+		"title": "Django Rest Framework",
+		"topic": "Make APIView API",
+		"description": "Blogging API's",
+		"content": "This is the first Attempt using APIView for Blogging Engine.",
+		"author": "1"
+	}
+}
+
+---
+{
+	"title": "Django Rest Framework",
+	"topic": "Make APIView API",
+	"description": "Blogging API's",
+	"content": [
+		"This is the first Attempt using APIView for Blogging Engine."
+		],
+	"img": [
+		"https://blog.restcase.com/content/images/2016/11/api-collaboration.png"
+		],
+	"auther": "info@arsalaan.net"
+}
+
+------
+{
+	"title": "Django Rest Framework",
+	"topic": "Make APIView API",
+	"description": "Blogging API's",
+	"content": "This is the first Attempt using APIView for Blogging Engine.",
+	"img": "https://blog.restcase.com/content/images/2016/11/api-collaboration.png",
+	"author": "info@arsalaan.net"
+}
+
+----
+{
+	"title": "Django Rest Framework",
+	"topic": "Make APIView API",
+	"description": "Blogging API's",
+	"content": "This is the first Attempt using APIView for Blogging Engine.",
+	"author": "info@arsalaan.net"
+}
+
+----
+{
+    "title": [
+        "This field is required."
+    ],
+    "topic": [
+        "This field is required."
+    ],
+    "description": [
+        "This field is required."
+    ],
+    "content": [
+        "This field is required."
+    ],
+    "img": [
+        "No file was submitted."
+    ],
+    "auther": [
+        "This field is required."
+    ]
+}
+
+-----

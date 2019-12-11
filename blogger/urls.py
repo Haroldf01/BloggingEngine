@@ -1,7 +1,10 @@
 from django.urls import path
 from . import views
 
+# NOTE app_name will help us do a reverse look-up latter
+app_name = "articles"
+
 urlpatterns = [
-    path('', views.BloggerList.as_view()),
-    path('<int:pk>/', views.BlogDetail.as_view()),
+    path('', views.BloggerView.as_view()),
+    path('<int:pk>', views.BloggerView.as_view()),
 ]
