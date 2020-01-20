@@ -10,16 +10,11 @@
 
 ---
 {
-	"title": "Django Rest Framework",
-	"topic": "Make APIView API",
-	"description": "Blogging API's",
-	"content": [
-		"This is the first Attempt using APIView for Blogging Engine."
-		],
-	"img": [
-		"https://blog.restcase.com/content/images/2016/11/api-collaboration.png"
-		],
-	"auther": "info@arsalaan.net"
+    "title": "Natural Language Processing",
+    "topic": "NLP",
+    "description": "NLP problem",
+    "content": "NLP application is what is needded",
+    "img": "https://excellenceassured.com/wp-content/uploads/2012/11/Screen-shot-2011-08-23-at-16.28.36.png"
 }
 
 ------
@@ -41,26 +36,15 @@
 	"author": "info@arsalaan.net"
 }
 
-----
 {
-    "title": [
-        "This field is required."
-    ],
-    "topic": [
-        "This field is required."
-    ],
-    "description": [
-        "This field is required."
-    ],
-    "content": [
-        "This field is required."
-    ],
-    "img": [
-        "No file was submitted."
-    ],
-    "auther": [
-        "This field is required."
-    ]
+	"title": "React JS",
+	"topic": "Make Frontend using React JS",
+	"slug": "Blog_three",
+	"description": "Landing Page using React",
+	"content": "This is the first Attempt using React JS for building a landing page",
+	"author": "darsalaan@gmail.com"
 }
+
+----
 
 -----

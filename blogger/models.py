@@ -3,6 +3,7 @@ from django.conf import settings
 from user.models import User
 import os
 
+from django.template.defaultfilters import slugify
 
 STATUS = (
 	(0, 'draft'),
@@ -24,6 +25,10 @@ class Blogger(models.Model):
 
 	class Meta:
 		ordering = ['-created_on', '-updated_on']
+
+	def save(self, *args, **kwargs):
+		self.slug = slugify(self.title)
+		super(Blogger, self).save(*args, **kwargs)
 
 	def __str__(self):
 		return self.title

@@ -1,3 +1,4 @@
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -9,14 +10,16 @@ from .serializers import BloggerSerializer
 
 
 class BloggerView(APIView):
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+
     def get(self, request, pk=None):
         if pk:
+            # FIXME: proper response should be sent if the key does not exist...!!!
             article = Blogger.objects.get(pk=pk)
             serializer = BloggerSerializer(article, many=False)
-        articles = Blogger.objects.all()
-        # print('\n', articles, '\n')
-        serializer = BloggerSerializer(articles, many=True)
-        # print('\n', serializer.data, '\n')
+        else:
+            articles = Blogger.objects.all()
+            serializer = BloggerSerializer(articles, many=True)
         return Response(serializer.data)
 
     def post(self, request):
@@ -32,6 +35,9 @@ class BloggerView(APIView):
     def put(self, request, pk):
         saved_article = get_object_or_404(Blogger.objects.all(), pk=pk)
         data = request.data
+        print('\n', 'data in put')
+        print('\n', type(data), '\n')
+        print('\n', data, '\n')
         serializer = BloggerSerializer(instance=saved_article, data=data, partial=True)
         if serializer.is_valid(raise_exception=True):
             article_saved = serializer.save()

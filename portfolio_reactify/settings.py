@@ -69,8 +69,7 @@ ROOT_URLCONF = 'portfolio_reactify.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,7 +91,7 @@ WSGI_APPLICATION = 'portfolio_reactify.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'portfolioBlogDB',
+        'NAME': 'portfolioblogdb',
         'USER': 'postgres',
         'PASSWORD': 'bobTheBuilder',
         'HOST': '127.0.0.1',
@@ -141,4 +140,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = os.path.join(BASE_DIR, 'media/')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'blogger/media')
+MEDIA_ROOT = 'blogger/media/'
