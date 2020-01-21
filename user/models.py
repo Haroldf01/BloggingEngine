@@ -44,12 +44,12 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-	phone_regex = RegexValidator(regex=r'^\+?1?\d{9,14}$', message='phone number must be entered with country code without spaces.')
+	phone_regex = RegexValidator(regex=r'^\+?1?\d{9,14}$', message='phone number must be entered with country code & without spaces.')
 	firstName = models.CharField(max_length=50)
 	lastName = models.CharField(max_length=50)
 	email = models.EmailField(max_length=254, unique=True)
 	phone = models.CharField(validators=[phone_regex], max_length=15)
-	active = models.BooleanField(default=True)
+	status = models.BooleanField(default=True)
 	staff = models.BooleanField(default=False)
 	admin = models.BooleanField(default=False)
 	active = models.DateTimeField(auto_now_add=True)

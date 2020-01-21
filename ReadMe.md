@@ -16,11 +16,14 @@
 - **email:** info@arsalaan.net
 - **password:** something_simple
 
+- **email:** haroldf01@gmail.com
+- **password:** pass@123
+
 #### Info about the database used and credentials
 
 In this project the database is postgreSql.
 
-- **databaseName:** portfolioBlogDB
+- **databaseName:** portfolioblogdb
 - **databaseUser:** postgres
 - **password:** bobTheBuilder
 

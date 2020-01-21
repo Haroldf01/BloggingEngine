@@ -1,16 +1,23 @@
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import permissions
+from rest_framework import generics
 from rest_framework import status
 
 from django.shortcuts import get_object_or_404
 
 from .models import Blogger
-from .serializers import BloggerSerializer
+from user.models import User
+from .serializers import BloggerSerializer, UserSerializer
 
 
 class BloggerView(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
     def get(self, request, pk=None):
         if pk:
@@ -26,7 +33,6 @@ class BloggerView(APIView):
         article = request.data
         serializer = BloggerSerializer(data=article)
 
-        # FIXME img: The submitted data was not a file. Check the encoding type on the form.
         if serializer.is_valid(raise_exception=True):
             article_saved = serializer.save(author=self.request.user)
             return Response({'Success': 'Article {} created successfully'.format(article_saved.title)}, status=status.HTTP_201_CREATED)
@@ -35,10 +41,8 @@ class BloggerView(APIView):
     def put(self, request, pk):
         saved_article = get_object_or_404(Blogger.objects.all(), pk=pk)
         data = request.data
-        print('\n', 'data in put')
-        print('\n', type(data), '\n')
-        print('\n', data, '\n')
-        serializer = BloggerSerializer(instance=saved_article, data=data, partial=True)
+        serializer = BloggerSerializer(
+            instance=saved_article, data=data, partial=True)
         if serializer.is_valid(raise_exception=True):
             article_saved = serializer.save()
             return Response({"success": "Article '{}' updated successfully".format(article_saved.title)})
@@ -48,3 +52,13 @@ class BloggerView(APIView):
         article = get_object_or_404(Blogger.objects.all(), pk=pk)
         article.delete()
         return Response({"message": "Article with id `{}` has been deleted.".format(pk)}, status=status.HTTP_204_NO_CONTENT)
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
