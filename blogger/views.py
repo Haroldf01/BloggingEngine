@@ -9,12 +9,14 @@ from django.shortcuts import get_object_or_404
 
 from .models import Blogger
 from user.models import User
+from .permissions import IsOwnerOrReadOnly
 from .serializers import BloggerSerializer, UserSerializer
 
 
 class BloggerView(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
