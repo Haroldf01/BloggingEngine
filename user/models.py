@@ -61,13 +61,13 @@ class User(AbstractBaseUser):
 
 	def fullname(self):
 		if self.firstName and self.lastName:
-			return self.firstName + self.lastName
+			return "{} {}".format(self.firstName, self.lastName)
 		else:
 			return self.email
 
 	def __str__(self):
 		if self.firstName and self.lastName:
-			return self.firstName + self.lastName
+			return "{} {}".format(self.firstName, self.lastName)
 		else:
 			return self.email
 

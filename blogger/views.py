@@ -12,6 +12,8 @@ from user.models import User
 from .permissions import IsOwnerOrReadOnly
 from .serializers import BloggerSerializer, UserSerializer
 
+from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope
+
 
 class BloggerView(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
@@ -37,7 +39,8 @@ class BloggerView(APIView):
 
         if serializer.is_valid(raise_exception=True):
             article_saved = serializer.save(author=self.request.user)
-            return Response({'Success': 'Article {} created successfully'.format(article_saved.title)}, status=status.HTTP_201_CREATED)
+            return Response({'Success': 'Article {} created successfully'.format(article_saved.title)},
+                            status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
@@ -53,14 +56,17 @@ class BloggerView(APIView):
     def delete(self, request, pk):
         article = get_object_or_404(Blogger.objects.all(), pk=pk)
         article.delete()
-        return Response({"message": "Article with id `{}` has been deleted.".format(pk)}, status=status.HTTP_204_NO_CONTENT)
+        return Response({"message": "Article with id `{}` has been deleted.".format(pk)},
+                        status=status.HTTP_204_NO_CONTENT)
 
 
 class UserList(generics.ListAPIView):
+    permission_classes = (permissions.IsAuthenticated, TokenHasReadWriteScope)
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
 class UserDetail(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticated, TokenHasReadWriteScope)
     queryset = User.objects.all()
     serializer_class = UserSerializer

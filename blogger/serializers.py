@@ -31,8 +31,9 @@ class BloggerSerializer(serializers.Serializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    # blogs = serializers.PrimaryKeyRelatedField(many=True, queryset=models.Blogger.objects.all())
+    blogs = serializers.PrimaryKeyRelatedField(many=True, queryset=models.Blogger.objects.all())
 
     class Meta:
         model = User
-        fields = ('id', 'email')
+        fields = ('id', 'email', 'blogs')
+        # fields = ('id', 'email', 'firstName', 'lastName')
